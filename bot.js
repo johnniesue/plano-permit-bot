@@ -33,8 +33,8 @@ function handleStep() {
 
 function showHeaterOptions() {
     const chatBox = document.getElementById("chatBox");
-    chatBox.innerText += "\nWhat type of water heater is being installed?\n";
-document.getElementById("extraFields").style.display = "block";
+    chatBox.innerText += "\\nSelect water heater type below:";
+document.getElementById("userInput").style.display = "none";
 
     const types = [
         "40-gallon Gas", "50-gallon Gas", "75-gallon Gas",
