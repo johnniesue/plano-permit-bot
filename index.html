@@ -3,12 +3,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Plano Permit Helper Bot</title>
+    <title>Plano Permit Bot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="bot-box">
         <div id="chatBox"></div>
+
+        <!-- Additional permit fields -->
+        <div id="extraFields" style="display:none;">
+            <h3>Permit Details</h3>
+            <label>Homeowner Name:<br><input type="text" id="homeownerName"></label><br>
+            <label>Phone Number:<br><input type="tel" id="homeownerPhone"></label><br>
+            <label>Email:<br><input type="email" id="homeownerEmail"></label><br>
+            <label>Property Type:<br>
+                <select id="propertyType">
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                </select>
+            </label><br><br>
+            <h4>Existing Water Heater</h4>
+            <label>Age:<br><input type="text" id="existingAge"></label><br>
+            <label>Model:<br><input type="text" id="existingModel"></label><br>
+            <label>Serial:<br><input type="text" id="existingSerial"></label><br>
+            <h4>New Water Heater</h4>
+            <label>Manufacturer:<br><input type="text" id="newManufacturer"></label><br>
+            <label>Model:<br><input type="text" id="newModel"></label><br>
+            <label>BTU/Voltage:<br><input type="text" id="newBTU"></label><br>
+        </div>
+
         <input type="text" id="userInput" placeholder="Type your answer..." />
         <button onclick="handleStep()">Submit</button>
         <button onclick="resetBot()">Restart</button>
