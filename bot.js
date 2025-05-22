@@ -1,6 +1,6 @@
 let step = 0;
 let data = {};
-const approvedLicenses = ["M-12345", "M-56789", "M-43210"]; // Replace with your real license numbers
+const approvedLicenses = ["M-43801", "M-46472"];
 
 function handleStep() {
     const inputElement = document.getElementById("userInput");
