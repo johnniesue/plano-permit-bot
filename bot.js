@@ -1,7 +1,7 @@
 
 let step = 0;
 let data = {};
-const approvedLicenses = ["M-43801", "M-46472"]; // Replace or extend with valid license numbers
+const approvedLicenses = ["M-43801", "M-46472"];
 
 function handleStep() {
     const inputElement = document.getElementById("userInput");
@@ -25,41 +25,68 @@ function handleStep() {
         case 2:
             data.address = input;
             chatBox.innerText += "\nYou: " + input;
-            chatBox.innerText += "\nWhat type of water heater is being installed?";
-            break;
-        case 3:
-            data.heaterType = input;
-            chatBox.innerText += "\nYou: " + input;
-            showInstallOptions();
+            showHeaterOptions();
             return;
     }
     step++;
 }
 
+function showHeaterOptions() {
+    const chatBox = document.getElementById("chatBox");
+    chatBox.innerText += "\nWhat type of water heater is being installed?\n";
+    document.getElementById("userInput").style.display = "none";
+
+    const types = [
+        "40-gallon Gas", "50-gallon Gas", "75-gallon Gas",
+        "50-gallon Electric", "Tankless", "Other"
+    ];
+
+    const container = document.createElement("div");
+    container.className = "button-container";
+
+    types.forEach(type => {
+        const btn = document.createElement("button");
+        btn.innerText = type;
+        btn.onclick = () => handleHeaterSelection(type);
+        container.appendChild(btn);
+    });
+
+    document.querySelector(".bot-box").appendChild(container);
+}
+
+function handleHeaterSelection(type) {
+    data.heaterType = type;
+    document.querySelectorAll(".button-container").forEach(el => el.remove());
+    showInstallOptions();
+}
+
 function showInstallOptions() {
     const chatBox = document.getElementById("chatBox");
     chatBox.innerText += "\nWhere is the unit being installed?\n";
-    const locations = ["Attic", "Garage", "Closet", "Exterior"];
-    const inputArea = document.getElementById("userInput");
-    inputArea.style.display = "none";
 
-    locations.forEach(location => {
+    const locations = ["Attic", "Garage", "Closet", "Exterior"];
+    const container = document.createElement("div");
+    container.className = "button-container";
+
+    locations.forEach(loc => {
         const btn = document.createElement("button");
-        btn.innerText = location;
-        btn.onclick = () => handleLocationSelection(location);
-        document.body.appendChild(btn);
+        btn.innerText = loc;
+        btn.onclick = () => handleLocationSelection(loc);
+        container.appendChild(btn);
     });
+
+    document.querySelector(".bot-box").appendChild(container);
 }
 
 function handleLocationSelection(location) {
     data.location = location;
+    document.querySelectorAll(".button-container").forEach(el => el.remove());
     const chatBox = document.getElementById("chatBox");
     let floodNote = (location.toLowerCase() === "attic") ? "\nNote: Flood stop device required for attic installations." : "";
     const scope = `Replace existing ${data.heaterType} AO Smith water heater in ${data.location}. Includes flood stop device per code. Work performed by licensed Master Plumber in compliance with Plano code.`;
     chatBox.innerText += "\nYou: " + location + floodNote + "\nScope of Work:\n" + scope;
     chatBox.innerText += "\n\nSubmit permit at: https://etrakit.planotx.org/etrakit3/";
     chatBox.innerText += "\n\nNeed help? Email johnniesue@a-1apsvc.com or call 469-900-5194.";
-    step++;
 }
 
 function resetBot() {
@@ -67,7 +94,7 @@ function resetBot() {
     data = {};
     document.getElementById("chatBox").innerText = "";
     document.getElementById("userInput").style.display = "inline-block";
-    document.querySelectorAll("button:not([onclick='handleStep()']):not([onclick='resetBot()'])").forEach(btn => btn.remove());
+    document.querySelectorAll(".button-container").forEach(el => el.remove());
     document.getElementById("userInput").value = "";
     handleStep();
 }

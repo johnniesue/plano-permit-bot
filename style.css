@@ -11,11 +11,13 @@ body {
     background: white;
     padding: 20px;
     border-radius: 8px;
+    text-align: center;
 }
 #chatBox {
     min-height: 300px;
     white-space: pre-line;
     margin-bottom: 10px;
+    text-align: left;
 }
 #userInput {
     width: 70%;
@@ -24,4 +26,11 @@ body {
 button {
     padding: 10px 15px;
     margin: 5px;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 10px;
 }
